@@ -30,7 +30,7 @@ build/
 ### VS Code ###
 .vscode/
 
-/doc/
+#/doc/
 /node_modules/
 /src/
 /dist/
