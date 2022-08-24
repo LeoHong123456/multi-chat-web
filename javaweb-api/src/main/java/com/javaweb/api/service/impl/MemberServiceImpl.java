@@ -1,0 +1,92 @@
+// +----------------------------------------------------------------------
+// | JavaWeb_Layui混编版框架 [ JavaWeb ]
+// +----------------------------------------------------------------------
+// | 版权所有 2021 上海JavaWeb研发中心
+// +----------------------------------------------------------------------
+// | 官方网站: http://www.javaweb.vip/
+// +----------------------------------------------------------------------
+// | 作者: 鲲鹏 <javaweb520@gmail.com>
+// +----------------------------------------------------------------------
+// | 免责声明:
+// | 本软件框架禁止任何单位和个人用于任何违法、侵害他人合法利益等恶意的行为，禁止用于任何违
+// | 反我国法律法规的一切平台研发，任何单位和个人使用本软件框架用于产品研发而产生的任何意外
+// |  、疏忽、合约毁坏、诽谤、版权或知识产权侵犯及其造成的损失 (包括但不限于直接、间接、附带
+// | 或衍生的损失等)，本团队不承担任何法律责任。本软件框架已申请版权保护，任何组织、单位和个
+// | 人不得有任何侵犯我们的版权的行为(包括但不限于分享、转售、恶意传播，开源等等)，否则产生
+// | 的一切后果和损失由侵权者全部承担，本软件框架只能用于公司和个人内部的法律所允许的合法合
+// | 规的软件产品研发，详细声明内容请阅读《框架免责声明》附件；
+// +----------------------------------------------------------------------
+
+package com.javaweb.api.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.javaweb.api.dto.LoginDto;
+import com.javaweb.api.entity.Member;
+import com.javaweb.api.mapper.MemberMapper;
+import com.javaweb.api.service.IMemberService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javaweb.common.utils.CommonUtils;
+import com.javaweb.common.utils.JsonResult;
+import com.javaweb.common.utils.JwtUtil;
+import com.javaweb.common.utils.StringUtils;
+import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * 会员表 服务实现类
+ * </p>
+ *
+ * @author 鲲鹏
+ * @since 2021-10-20
+ */
+@Service
+public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> implements IMemberService {
+
+    @Autowired
+    private MemberMapper memberMapper;
+
+    /**
+     * 会员登录
+     *
+     * @param loginDto 参数
+     * @return
+     */
+    @Override
+    public JsonResult login(LoginDto loginDto) {
+        // 会员账号
+        if (StringUtils.isEmpty(loginDto.getUsername())) {
+            return JsonResult.error("会员账号不能为空");
+        }
+        // 会员密码
+        if (StringUtils.isEmpty(loginDto.getPassword())) {
+            return JsonResult.error("会员密码不能为空");
+        }
+        // 查询用户信息
+        Member member = memberMapper.selectOne(new LambdaQueryWrapper<Member>()
+                .eq(Member::getUsername, loginDto.getUsername())
+                .eq(Member::getMark, 1)
+                .last("limit 1"));
+        if (StringUtils.isNull(member)) {
+            return JsonResult.error("用户不存在");
+        }
+        // 密码校验
+        if (!member.getPassword().equals(CommonUtils.password(loginDto.getPassword()))) {
+            return JsonResult.error("用户密码不正确");
+        }
+        // 用户状态验证
+        if (!member.getStatus().equals(1)) {
+            return JsonResult.error("您的账号已被禁用");
+        }
+        // 返回Token
+        String token = JwtUtil.createJWT(member.getId());
+        System.out.println("token值：" + token);
+        // Jwt解密代码如下：
+        Claims claims = JwtUtil.parseJWT(token);
+        Integer userId = Integer.valueOf(claims.get("id").toString());
+        System.out.println("用户ID：" + userId);
+        return JsonResult.success(token);
+    }
+
+}
