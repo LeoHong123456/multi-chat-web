@@ -1,6 +1,6 @@
 /**
  * 商品SKU
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-06-11
  */
 layui.use(['func'], function () {

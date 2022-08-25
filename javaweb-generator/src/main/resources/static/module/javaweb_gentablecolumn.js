@@ -1,6 +1,6 @@
 /**
  * 代码生成列
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-05-10
  */
 layui.use(['func'], function () {

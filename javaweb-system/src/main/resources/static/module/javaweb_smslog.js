@@ -1,6 +1,6 @@
 /**
  * 短信日志
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-05-04
  */
 layui.use(['func'], function () {

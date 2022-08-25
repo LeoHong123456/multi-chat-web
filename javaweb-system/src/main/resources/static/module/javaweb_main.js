@@ -1,6 +1,6 @@
 /**
  * 欢迎页
- * @author 鲲鹏
+ * @author admin
  * @since 2021/10/18
  */
 layui.define(['jquery'], function (exports) {
