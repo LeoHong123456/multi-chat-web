@@ -1,6 +1,6 @@
 /**
  * 站点
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-04-20
  */
 layui.use(['func'], function () {

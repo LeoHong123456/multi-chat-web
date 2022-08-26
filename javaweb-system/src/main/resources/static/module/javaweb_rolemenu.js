@@ -1,6 +1,6 @@
 /**
  * 角色菜单关系
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-05-08
  */
 layui.use(['func'], function () {

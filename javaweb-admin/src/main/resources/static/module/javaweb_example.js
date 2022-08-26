@@ -1,6 +1,6 @@
 /**
  * 演示案例一
- * @auth 鲲鹏
+ * @auth admin
  * @date 2021-10-25
  */
 layui.use(['func'], function () {

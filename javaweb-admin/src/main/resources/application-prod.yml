@@ -236,7 +236,7 @@ javaweb:
 # 代码生成
 generate:
   # 作者
-  author: 鲲鹏
+  author: admin
   # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
   packageName: com.javaweb.admin
   # 模块名

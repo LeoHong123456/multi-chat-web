@@ -1,6 +1,6 @@
 /**
  * 配置数据
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-05-03
  */
 layui.use(['func'], function () {

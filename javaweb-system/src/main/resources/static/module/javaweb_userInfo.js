@@ -1,6 +1,6 @@
 /**
  * 个人中心
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-05-04
  */
 layui.use(['form', 'element', 'admin', 'func'], function () {

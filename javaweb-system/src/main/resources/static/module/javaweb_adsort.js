@@ -1,6 +1,6 @@
 /**
  * 广告位描述
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-05-01
  */
 layui.use(['func'], function () {

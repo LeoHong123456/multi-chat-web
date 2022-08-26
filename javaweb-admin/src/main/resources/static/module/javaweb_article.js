@@ -1,6 +1,6 @@
 /**
  * 文章管理
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-08-11
  */
 layui.use(['func'], function () {

@@ -1,6 +1,6 @@
 /**
  * 商品
- * @auth 鲲鹏
+ * @auth admin
  * @date 2020-06-09
  */
 layui.use(['func'], function () {
