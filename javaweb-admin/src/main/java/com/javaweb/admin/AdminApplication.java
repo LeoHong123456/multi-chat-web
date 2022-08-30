@@ -16,5 +16,4 @@ public class AdminApplication {
         SpringApplication.run(AdminApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  JavaWeb混编版【旗舰版】框架启动成功   ლ(´ڡ`ლ)ﾞ");
     }
-
 }
